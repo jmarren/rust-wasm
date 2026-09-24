@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Rust + WebAssembly</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 40rem; margin: 2rem auto; padding: 0 1rem; }
+    section { border: 1px solid #ddd; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; }
+    output { display: block; margin-top: .5rem; font-family: monospace; }
+  </style>
+</head>
+<body>
+  <h1>Rust → WebAssembly</h1>
+
+  <section>
+    <h2>Greet</h2>
+    <input id="name" placeholder="Your name">
+    <button id="greet-btn">Greet</button>
+    <output id="greet-out"></output>
+  </section>
+
+  <section>
+    <h2>Fibonacci</h2>
+    <input id="fib-n" type="number" value="50" min="0" max="93">
+    <button id="fib-btn">Compute</button>
+    <output id="fib-out"></output>
+  </section>
+
+  <section>
+    <h2>Count primes</h2>
+    <input id="prime-limit" type="number" value="10000000" min="0">
+    <button id="prime-btn">Run</button>
+    <output id="prime-out"></output>
+  </section>
+
+  <script type="module">
+    // All DOM wiring lives in Rust (src/dom.rs); init() runs its #[wasm_bindgen(start)] fn.
+    import init from "./pkg/rust_wasm.js";
+    init();
+  </script>
+</body>
+</html>
